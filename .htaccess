@@ -1,13 +1,10 @@
 # Zandev.id Security Configuration
 
-# Disable Directory Listing
-Options -Indexes
+# Disable Directory Listing (Commented out to prevent 403 if restricted by host)
+# Options -Indexes
 
-# Block access to hidden files/directories (like .git, .env)
-<FilesMatch "^\.">
-    Order allow,deny
-    Deny from all
-</FilesMatch>
+# Block access to .git specifically instead of all dot files
+RedirectMatch 404 /\.git
 
 # HTTP Security Headers
 <IfModule mod_headers.c>

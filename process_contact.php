@@ -2,15 +2,26 @@
 // Mencegah akses langsung ke file ini jika bukan dari form (POST)
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
+    // Keamanan: Validasi HTTP_REFERER (Hanya izinkan request dari domain sendiri)
+    $allowed_host = 'zandev.id';
+    $referer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '';
+    // Jika referer tidak mengandung zandev.id dan bukan dari localhost, tolak (anti-CSRF dasar)
+    if (!empty($referer) && strpos($referer, $allowed_host) === false && strpos($referer, 'localhost') === false) {
+        die("SECURITY ALERT: UNAUTHORIZED REQUEST ORIGIN.");
+    }
+
     // Konfigurasi Email Anda di Hostinger
     $to = "devone@zandev.id"; 
     $subject = "Pesan Baru dari Website Zandev.id";
     
-    // Mengambil dan membersihkan input data dari form
+    // Mengambil dan membersihkan input data dari form (Mencegah Email Header Injection)
     $name = strip_tags(trim($_POST["name"]));
-    $name = str_replace(array("\r","\n"),array(" "," "),$name);
+    $name = str_replace(array("\r","\n","%0a","%0d"), array(" "," "," "," "), $name); // Filter ketat newline
+    
     $email = filter_var(trim($_POST["email"]), FILTER_SANITIZE_EMAIL);
-    $message = trim($_POST["message"]);
+    $email = str_replace(array("\r","\n","%0a","%0d"), "", $email); // Hapus total newline dari email
+    
+    $message = htmlspecialchars(trim($_POST["message"]), ENT_QUOTES, 'UTF-8'); // XSS prevention pada body pesan
     
     // Validasi data
     if ( empty($name) || empty($message) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {

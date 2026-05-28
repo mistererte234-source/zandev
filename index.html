@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zandev.id - Architect of the Digital Realm</title>
+    <meta name="description" content="Portfolio of Zandev.id - Building digital experiences with modern web technologies.">
+    <link rel="icon" type="image/png" href="assets/images/logo.png">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;600&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+    
+    <!-- Phosphor Icons (Modern icons) -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+    
+    <!-- Cyberpunk grid background -->
+    <div class="cyber-grid"></div>
+
+    <!-- Hacker Splash Screen -->
+    <div id="splash-screen" class="splash-screen">
+        <div class="splash-content">
+            <div class="splash-logo-container">
+                <img src="assets/images/logo.png" alt="Zandev Logo" class="splash-logo">
+                <div class="scanner-line"></div>
+            </div>
+            <div class="splash-text">
+                <span class="glitch-small" data-text="SYSTEM BOOT SEQUENCE INITIATED...">SYSTEM BOOT SEQUENCE INITIATED...</span>
+                <div class="loading-bar-container">
+                    <div class="loading-bar"></div>
+                </div>
+                <div class="sys-log" id="splash-log">Mounting virtual drives...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="glass-nav">
+        <div class="nav-container">
+            <a href="#" class="logo-link">
+                <img src="assets/images/logo-text.png" alt="Zandev Logo" class="nav-logo">
+            </a>
+            <ul class="nav-links">
+                <li><a href="#home">_home</a></li>
+                <li><a href="#about">_about</a></li>
+                <li><a href="#portfolio">_portfolio</a></li>
+                <li><a href="#contact">_contact</a></li>
+            </ul>
+            <button class="mobile-menu-btn">
+                <i class="ph ph-list"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <p class="greeting">> SYSTEM READY...</p>
+                <h1 class="glitch" data-text="HELLO, WE ARE ZANDEV.ID">HELLO, WE ARE ZANDEV.ID</h1>
+                <h2 class="subtitle">Crafting <span class="highlight">Digital Experiences</span> & <span class="highlight">Architecting Code</span>.</h2>
+                <p class="description">
+                    Kami adalah pengembang yang berfokus pada pembangunan solusi digital mutakhir dengan perpaduan desain modern dan kode yang solid.
+                </p>
+                <div class="hero-cta">
+                    <a href="#portfolio" class="btn btn-primary">
+                        <i class="ph ph-terminal"></i> Initialize_Portfolio
+                    </a>
+                    <a href="#contact" class="btn btn-secondary">
+                        <i class="ph ph-envelope-simple"></i> Ping_Us
+                    </a>
+                </div>
+            </div>
+            <div class="hero-graphic">
+                <div class="glass-card terminal-card">
+                    <div class="terminal-header">
+                        <span class="dot red"></span>
+                        <span class="dot yellow"></span>
+                        <span class="dot green"></span>
+                        <div class="terminal-title">zandev_status.sh</div>
+                    </div>
+                    <div class="terminal-body" id="terminal-typing">
+                        <!-- Content injected via JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section id="portfolio" class="portfolio-section">
+            <div class="section-header">
+                <h2><span class="neon-text">01.</span> _our_archives</h2>
+                <p>Koleksi proyek yang terus bertambah. Dynamic and evolving.</p>
+            </div>
+
+            <!-- Portfolio Filters -->
+            <div class="portfolio-filters" id="portfolio-filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="Web App">Web App</button>
+                <button class="filter-btn" data-filter="E-Commerce">E-Commerce</button>
+                <button class="filter-btn" data-filter="UI/UX">UI/UX</button>
+            </div>
+            
+            <div class="portfolio-grid" id="portfolio-container">
+                <!-- Portfolios will be injected here by JS -->
+            </div>
+
+            <!-- Load More Button -->
+            <div class="portfolio-actions">
+                <button id="load-more-btn" class="btn btn-secondary" style="display: none;">
+                    <i class="ph ph-caret-down"></i> Load More Data
+                </button>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact-section">
+            <div class="glass-card contact-card">
+                <div class="section-header text-center">
+                    <h2><span class="neon-text">02.</span> _establish_connection</h2>
+                    <p>Mari berkolaborasi membangun sesuatu yang luar biasa.</p>
+                </div>
+                
+                <form class="contact-form" action="process_contact.php" method="POST">
+                    <div class="form-group">
+                        <label for="name">ID_NAME</label>
+                        <input type="text" id="name" name="name" placeholder="Masukkan nama Anda" class="glass-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">PROTOCOL_EMAIL</label>
+                        <input type="email" id="email" name="email" placeholder="nama@domain.com" class="glass-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">DATA_PAYLOAD</label>
+                        <textarea id="message" name="message" rows="4" placeholder="Pesan Anda..." class="glass-input" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">
+                        <i class="ph ph-paper-plane-tilt"></i> TRANSMIT_DATA
+                    </button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="glass-footer">
+        <p>&copy; 2026 Zandev.id. System operated securely.</p>
+        <div class="social-links">
+            <a href="#"><i class="ph ph-github-logo"></i></a>
+            <a href="#"><i class="ph ph-linkedin-logo"></i></a>
+            <a href="#"><i class="ph ph-twitter-logo"></i></a>
+        </div>
+    </footer>
+
+    <!-- Custom JS -->
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
             title: "Kitab Online",
             description: "Portal pencarian kitab kuning (Turath) & Tafsir Al-Quran era digital. Terintegrasi AI dengan antarmuka futuristik.",
             tags: ["Web App", "Search Engine", "AI"],
-            url: "https://kitab.online",
+            url: "https://kitab-online.vercel.app/",
             category: "Web App",
             image: "assets/images/kitab-online.png"
         },

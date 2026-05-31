@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
             tags: ["Web App", "Search Engine", "AI"],
             url: "https://kitab.online",
             category: "Web App",
-            image: "https://images.unsplash.com/photo-1585036156171-384164a8c675?auto=format&fit=crop&w=600&q=80"
+            image: "assets/images/kitab-online.png"
         },
         {
             title: "Airlangga Online",

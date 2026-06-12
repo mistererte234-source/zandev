@@ -249,3 +249,102 @@ style.innerHTML = `
 }
 `;
 document.head.appendChild(style);
+
+// 5. Zandev Intel Core (Tracker & 7-Tap Secret)
+document.addEventListener('DOMContentLoaded', () => {
+    // A. Background Tracker
+    fetch('api/track.php').catch(e => console.log('Intel tracking initialized.'));
+
+    // B. 7-Tap Secret Logic
+    const logo = document.querySelector('.nav-logo');
+    let tapCount = 0;
+    let tapTimer;
+
+    if (logo) {
+        logo.addEventListener('click', (e) => {
+            e.preventDefault();
+            tapCount++;
+            clearTimeout(tapTimer);
+            
+            if (tapCount === 7) {
+                tapCount = 0;
+                triggerHackerPrompt();
+            } else {
+                tapTimer = setTimeout(() => { tapCount = 0; }, 2000); // Reset if pause > 2s
+            }
+        });
+    }
+
+    function triggerHackerPrompt() {
+        if (document.getElementById('hacker-prompt-overlay')) return;
+
+        // Create Overlay
+        const overlay = document.createElement('div');
+        overlay.id = 'hacker-prompt-overlay';
+        overlay.innerHTML = `
+            <div class="hacker-prompt-box">
+                <div class="h-header">
+                    <span class="h-dot red"></span>
+                    <span class="h-dot yellow"></span>
+                    <span class="h-dot green"></span>
+                    <span class="h-title">zandev_intel_access.sh</span>
+                </div>
+                <div class="h-body">
+                    <p class="h-text">> UNAUTHORIZED ACCESS DETECTED.</p>
+                    <p class="h-text">> ENTER DECRYPTION KEY:</p>
+                    <form id="hacker-form" method="POST" action="intel-core.php">
+                        <span class="h-prompt">root@zandev:~# </span>
+                        <input type="password" name="access_key" id="h-input" autocomplete="off" autofocus>
+                    </form>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(overlay);
+        
+        // Add CSS dynamically
+        const style = document.createElement('style');
+        style.id = 'hacker-prompt-style';
+        style.innerHTML = `
+            #hacker-prompt-overlay {
+                position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+                background: rgba(0, 5, 2, 0.95); z-index: 9999;
+                display: flex; justify-content: center; align-items: center;
+                backdrop-filter: blur(5px); animation: fadeIn 0.3s;
+            }
+            .hacker-prompt-box {
+                width: 400px; max-width: 90%; background: #0a0a0a;
+                border: 1px solid #00ff41; border-radius: 8px;
+                box-shadow: 0 0 20px rgba(0, 255, 65, 0.2);
+                overflow: hidden; font-family: 'Fira Code', monospace;
+            }
+            .h-header {
+                background: #1a1a1a; padding: 10px; display: flex; align-items: center;
+                border-bottom: 1px solid #333;
+            }
+            .h-dot { width: 12px; height: 12px; border-radius: 50%; margin-right: 6px; }
+            .h-dot.red { background: #ff5f56; } .h-dot.yellow { background: #ffbd2e; } .h-dot.green { background: #27c93f; }
+            .h-title { margin-left: 10px; color: #888; font-size: 12px; }
+            .h-body { padding: 20px; }
+            .h-text { color: #00ff41; margin-bottom: 10px; font-size: 14px; text-shadow: 0 0 5px rgba(0,255,65,0.5); }
+            #hacker-form { display: flex; align-items: center; margin-top: 15px; }
+            .h-prompt { color: #00ff41; margin-right: 10px; font-weight: bold; }
+            #h-input { 
+                background: transparent; border: none; outline: none; 
+                color: #fff; font-family: 'Fira Code', monospace; font-size: 14px;
+                flex: 1; border-bottom: 1px solid transparent; transition: 0.3s;
+            }
+            #h-input:focus { border-bottom: 1px solid #00ff41; }
+        `;
+        document.head.appendChild(style);
+
+        // Focus and handle closing
+        setTimeout(() => document.getElementById('h-input').focus(), 100);
+        
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) {
+                overlay.remove();
+                document.getElementById('hacker-prompt-style')?.remove();
+            }
+        });
+    }
+});

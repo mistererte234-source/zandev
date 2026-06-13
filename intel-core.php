@@ -158,11 +158,15 @@ try {
         <div class="charts-wrapper">
             <div class="chart-container">
                 <h3 class="section-title"><i class="ph ph-monitor"></i> OS Distribution</h3>
-                <canvas id="osChart" height="200"></canvas>
+                <div style="position: relative; height: 250px; width: 100%;">
+                    <canvas id="osChart"></canvas>
+                </div>
             </div>
             <div class="chart-container">
                 <h3 class="section-title"><i class="ph ph-device-mobile"></i> Device Types</h3>
-                <canvas id="deviceChart" height="200"></canvas>
+                <div style="position: relative; height: 250px; width: 100%;">
+                    <canvas id="deviceChart"></canvas>
+                </div>
             </div>
         </div>
 

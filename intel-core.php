@@ -95,6 +95,20 @@ try {
         .stat-value { font-size: 2.5rem; font-weight: 800; color: #fff; font-family: 'Fira Code', monospace; }
         
         .charts-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem; }
+        .chart-container { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; }
+        .section-title { font-size: 1.2rem; font-weight: 600; margin-bottom: 1rem; color: var(--primary); display: flex; align-items: center; gap: 10px; }
+        
+        .table-container { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow-x: auto; }
+        table { width: 100%; min-width: 800px; border-collapse: collapse; text-align: left; }
+        th, td { padding: 1rem; border-bottom: 1px solid var(--border); }
+        th { background: var(--surface-2); color: var(--text-muted); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
+        td { font-size: 0.95rem; }
+        tbody tr:hover { background: rgba(255,255,255,0.02); }
+        .ip-badge { background: rgba(0,255,65,0.1); color: var(--primary); padding: 4px 8px; border-radius: 4px; font-family: 'Fira Code', monospace; font-size: 0.85rem; border: 1px solid rgba(0,255,65,0.2); display: inline-block; }
+        .time-badge { color: var(--text-muted); font-size: 0.85rem; }
+        .btn { background: transparent; color: var(--text); border: 1px solid var(--border); padding: 8px 16px; border-radius: 6px; cursor: pointer; font-family: 'Fira Code', monospace; display: flex; align-items: center; gap: 8px; transition: 0.3s; text-decoration: none; }
+        .btn:hover { background: var(--surface-2); border-color: var(--primary); color: var(--primary); }
+
         @media (max-width: 768px) { 
             .charts-wrapper { grid-template-columns: 1fr; } 
             .stats-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
@@ -105,14 +119,14 @@ try {
             header { flex-direction: column; gap: 1rem; align-items: flex-start; }
             
             /* Responsive Hacker Table */
-            table, thead, tbody, th, td, tr { display: block; }
+            table, thead, tbody, th, td, tr { display: block; min-width: auto; }
             thead tr { position: absolute; top: -9999px; left: -9999px; }
             tr { border: 1px solid var(--border); border-radius: 8px; margin-bottom: 1rem; padding: 0.5rem; background: var(--surface-2); }
             td { border: none; border-bottom: 1px solid rgba(255,255,255,0.05); position: relative; padding: 0.8rem; padding-left: 40%; display: flex; align-items: center; justify-content: flex-end; text-align: right; }
             td:last-child { border-bottom: 0; }
             td::before { content: attr(data-label); position: absolute; left: 0.8rem; width: 35%; padding-right: 10px; white-space: nowrap; text-align: left; font-size: 0.8rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; }
             .ip-badge { font-size: 0.75rem; }
-            .table-container { background: transparent; border: none; }
+            .table-container { background: transparent; border: none; overflow: visible; padding: 0; }
         }
     </style>
 </head>

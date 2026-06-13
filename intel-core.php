@@ -95,20 +95,25 @@ try {
         .stat-value { font-size: 2.5rem; font-weight: 800; color: #fff; font-family: 'Fira Code', monospace; }
         
         .charts-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem; }
-        @media (max-width: 768px) { .charts-wrapper { grid-template-columns: 1fr; } }
-        .chart-container { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; }
-        .section-title { font-size: 1.2rem; font-weight: 600; margin-bottom: 1rem; color: var(--primary); display: flex; align-items: center; gap: 10px; }
-        
-        .table-container { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow-x: auto; }
-        table { width: 100%; min-width: 800px; border-collapse: collapse; text-align: left; }
-        th, td { padding: 1rem; border-bottom: 1px solid var(--border); }
-        th { background: var(--surface-2); color: var(--text-muted); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
-        td { font-size: 0.95rem; }
-        tbody tr:hover { background: rgba(255,255,255,0.02); }
-        .ip-badge { background: rgba(0,255,65,0.1); color: var(--primary); padding: 4px 8px; border-radius: 4px; font-family: 'Fira Code', monospace; font-size: 0.85rem; border: 1px solid rgba(0,255,65,0.2); display: inline-block; }
-        .time-badge { color: var(--text-muted); font-size: 0.85rem; }
-        .btn { background: transparent; color: var(--text); border: 1px solid var(--border); padding: 8px 16px; border-radius: 6px; cursor: pointer; font-family: 'Fira Code', monospace; display: flex; align-items: center; gap: 8px; transition: 0.3s; text-decoration: none; }
-        .btn:hover { background: var(--surface-2); border-color: var(--primary); color: var(--primary); }
+        @media (max-width: 768px) { 
+            .charts-wrapper { grid-template-columns: 1fr; } 
+            .stats-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+            .stat-card { padding: 1rem; }
+            .stat-title { font-size: 0.75rem; }
+            .stat-value { font-size: 1.8rem; }
+            .container { padding: 1rem; }
+            header { flex-direction: column; gap: 1rem; align-items: flex-start; }
+            
+            /* Responsive Hacker Table */
+            table, thead, tbody, th, td, tr { display: block; }
+            thead tr { position: absolute; top: -9999px; left: -9999px; }
+            tr { border: 1px solid var(--border); border-radius: 8px; margin-bottom: 1rem; padding: 0.5rem; background: var(--surface-2); }
+            td { border: none; border-bottom: 1px solid rgba(255,255,255,0.05); position: relative; padding: 0.8rem; padding-left: 40%; display: flex; align-items: center; justify-content: flex-end; text-align: right; }
+            td:last-child { border-bottom: 0; }
+            td::before { content: attr(data-label); position: absolute; left: 0.8rem; width: 35%; padding-right: 10px; white-space: nowrap; text-align: left; font-size: 0.8rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; }
+            .ip-badge { font-size: 0.75rem; }
+            .table-container { background: transparent; border: none; }
+        }
     </style>
 </head>
 <body>
@@ -130,9 +135,9 @@ try {
                 <div class="stat-title"><i class="ph ph-eye"></i> Total Page Views</div>
                 <div class="stat-value"><?= $totalVisits ?></div>
             </div>
-            <div class="stat-card">
+            <div class="stat-card" style="grid-column: 1 / -1;">
                 <div class="stat-title"><i class="ph ph-clock-counter-clockwise"></i> Latest Activity</div>
-                <div class="stat-value" style="font-size: 1.5rem; margin-top: 10px;"><?= count($visitors) > 0 ? date('H:i:s', strtotime($visitors[0]['last_seen'])) : 'N/A' ?></div>
+                <div class="stat-value" style="font-size: 1.5rem; margin-top: 5px;"><?= count($visitors) > 0 ? date('H:i:s', strtotime($visitors[0]['last_seen'])) : 'N/A' ?></div>
             </div>
         </div>
 
@@ -148,7 +153,7 @@ try {
         </div>
 
         <div class="table-container">
-            <h3 class="section-title" style="padding: 1.5rem 1.5rem 0.5rem;"><i class="ph ph-list-magnifying-glass"></i> Access Logs</h3>
+            <h3 class="section-title" style="padding: 1.5rem 0rem 0.5rem;"><i class="ph ph-list-magnifying-glass"></i> Access Logs</h3>
             <table>
                 <thead>
                     <tr>
@@ -161,20 +166,24 @@ try {
                 <tbody>
                     <?php foreach($visitors as $v): ?>
                     <tr>
-                        <td>
-                            <div class="ip-badge"><?= htmlspecialchars($v['ip']) ?></div>
-                            <div class="time-badge" style="margin-top: 6px;"><?= $v['last_seen'] ?></div>
-                        </td>
-                        <td>
-                            <div style="font-weight: 600; color: #fff; display:flex; align-items:center; gap:6px;">
-                                <i class="ph ph-map-pin"></i> <?= htmlspecialchars($v['city']) ?>
-                            </div>
-                            <div class="time-badge" style="display:flex; align-items:center; gap:6px; margin-top: 4px;">
-                                <i class="ph ph-hard-drives"></i> <?= htmlspecialchars($v['isp']) ?>
+                        <td data-label="Time / IP">
+                            <div style="text-align: right;">
+                                <div class="ip-badge"><?= htmlspecialchars($v['ip']) ?></div>
+                                <div class="time-badge" style="margin-top: 6px;"><?= $v['last_seen'] ?></div>
                             </div>
                         </td>
-                        <td>
-                            <div style="display:flex; align-items:center; gap:15px;">
+                        <td data-label="Location & ISP">
+                            <div style="text-align: right;">
+                                <div style="font-weight: 600; color: #fff; display:flex; align-items:center; justify-content: flex-end; gap:6px;">
+                                    <?= htmlspecialchars($v['city']) ?> <i class="ph ph-map-pin"></i>
+                                </div>
+                                <div class="time-badge" style="display:flex; align-items:center; justify-content: flex-end; gap:6px; margin-top: 4px;">
+                                    <?= htmlspecialchars($v['isp']) ?> <i class="ph ph-hard-drives"></i>
+                                </div>
+                            </div>
+                        </td>
+                        <td data-label="System Info">
+                            <div style="display:flex; align-items:center; justify-content: flex-end; gap:15px;">
                                 <span style="display:flex; align-items:center; gap:6px;" title="Browser">
                                     <i class="ph ph-globe"></i> <?= htmlspecialchars($v['browser']) ?>
                                 </span>
@@ -186,7 +195,7 @@ try {
                                 </span>
                             </div>
                         </td>
-                        <td>
+                        <td data-label="Visits">
                             <span style="background: var(--surface-2); padding: 4px 10px; border-radius: 12px; font-size: 0.85rem; font-weight: bold; border: 1px solid var(--border);">
                                 <?= $v['visit_count'] ?>x
                             </span>

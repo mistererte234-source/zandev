@@ -123,6 +123,7 @@ try {
     $stmt->execute([$ip]);
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
     
+    date_default_timezone_set('Asia/Jakarta');
     $now = date('Y-m-d H:i:s');
     
     if ($row) {

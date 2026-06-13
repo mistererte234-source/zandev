@@ -282,7 +282,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const overlay = document.createElement('div');
         overlay.id = 'hacker-prompt-overlay';
         overlay.innerHTML = `
-            <div class="hacker-prompt-box">
+            <div class="hacker-prompt-box" style="transition: transform 0.3s ease;">
                 <div class="h-header">
                     <span class="h-dot red"></span>
                     <span class="h-dot yellow"></span>
@@ -294,7 +294,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p class="h-text">> ENTER DECRYPTION KEY:</p>
                     <form id="hacker-form" method="POST" action="intel-core.php">
                         <span class="h-prompt">root@zandev:~# </span>
-                        <input type="password" name="access_key" id="h-input" autocomplete="off" autofocus>
+                        <input type="password" name="access_key" id="h-input" autocomplete="new-password" data-lpignore="true" autofocus>
                     </form>
                 </div>
             </div>
@@ -337,8 +337,18 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
         document.head.appendChild(style);
 
+        const hInput = document.getElementById('h-input');
+        const hBox = document.querySelector('.hacker-prompt-box');
+        
+        hInput.addEventListener('focus', () => {
+            if (window.innerWidth <= 768) hBox.style.transform = 'translateY(-25vh)';
+        });
+        hInput.addEventListener('blur', () => {
+            if (window.innerWidth <= 768) hBox.style.transform = 'translateY(0)';
+        });
+
         // Focus and handle closing
-        setTimeout(() => document.getElementById('h-input').focus(), 100);
+        setTimeout(() => hInput.focus(), 100);
         
         overlay.addEventListener('click', (e) => {
             if (e.target === overlay) {

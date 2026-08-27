@@ -41,6 +41,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // 1. Dynamic Portfolio Injection
     const portfolioData = [
         {
+            title: "Wastulanas",
+            description: "Platform digital modern untuk Wastulanas. Memadukan desain responsif dan performa tinggi untuk pengalaman pengguna terbaik.",
+            tags: ["Web App", "UI/UX", "Modern"],
+            url: "https://www.wastulanas.com",
+            category: "Web App",
+            image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80"
+        },
+        {
             title: "Kitab Online",
             description: "Portal pencarian kitab kuning (Turath) & Tafsir Al-Quran era digital. Terintegrasi AI dengan antarmuka futuristik.",
             tags: ["Web App", "Search Engine", "AI"],

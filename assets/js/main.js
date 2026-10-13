@@ -41,6 +41,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // 1. Dynamic Portfolio Injection
     const portfolioData = [
         {
+            title: "Meghalaya Hotel & Resort",
+            description: "Platform digital eksklusif resort pegunungan di ketinggian 1.200 mdpl (Pujon, Malang). Dilengkapi sistem reservasi langsung, bilingual switcher, dan visual interaktif.",
+            tags: ["Web App", "UI/UX", "Hospitality"],
+            url: "https://meghalayaresort.com/",
+            category: "Web App",
+            image: "assets/images/meghalaya.webp"
+        },
+        {
             title: "Wastulanas",
             description: "Platform digital modern untuk Wastulanas. Memadukan desain responsif dan performa tinggi untuk pengalaman pengguna terbaik.",
             tags: ["Web App", "UI/UX", "Modern"],
@@ -116,7 +124,9 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Filter data
         const filteredData = portfolioData.filter(item => {
-            return currentCategory === 'all' || item.category === currentCategory;
+            return currentCategory === 'all' || 
+                   item.category === currentCategory || 
+                   (item.tags && item.tags.includes(currentCategory));
         });
 
         // Calculate items to show
@@ -187,7 +197,7 @@ document.addEventListener('DOMContentLoaded', () => {
             "Connecting to database...",
             "SUCCESS: Connection established.",
             "Fetching portfolio data...",
-            "-> 4 records found.",
+            "-> Synchronized verified archives.",
             "Rendering UI components...",
             "System status: OPTIMAL.",
             "Awaiting user input..."

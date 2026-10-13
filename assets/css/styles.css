@@ -712,6 +712,21 @@ section {
     color: var(--text-muted);
 }
 
+.glass-footer p a {
+    color: var(--neon-green);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border-bottom: 1px dashed rgba(0, 255, 65, 0.4);
+    padding-bottom: 1px;
+}
+
+.glass-footer p a:hover {
+    color: var(--neon-cyan);
+    border-bottom-color: var(--neon-cyan);
+    text-shadow: 0 0 8px rgba(0, 240, 255, 0.6);
+}
+
 .social-links {
     display: flex;
     gap: 1.5rem;
